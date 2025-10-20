@@ -31,7 +31,7 @@ export default function BackToTopLogo({ homeAnchorId }: Props) {
         onClick={goTop}
         role="button"
         aria-label="Back to top"
-        className="hidden md:flex fixed bottom-6 left-6 items-center justify-center cursor-pointer z-30"
+        className="hidden md:flex fixed bottom-6 right-6 items-center justify-center cursor-pointer z-30"
       >
         <img
           src="/logo.png"
@@ -45,7 +45,7 @@ export default function BackToTopLogo({ homeAnchorId }: Props) {
         <button
           onClick={goTop}
           aria-label="Back to top"
-          className="md:hidden fixed bottom-6 left-4 z-40 w-12 h-12 rounded-full bg-purple-700 text-white shadow-lg flex items-center justify-center active:scale-95 transition"
+          className="md:hidden fixed bottom-6 right-4 z-40 w-12 h-12 rounded-full bg-purple-700 text-white shadow-lg flex items-center justify-center active:scale-95 transition"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
