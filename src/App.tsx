@@ -12,6 +12,8 @@ import Contact from './Contact';
 import Faq from './Faq';
 import LoginSignupModal from './LoginSignupModal';
 import NewsImage from './NewsImage';
+import HomeHero from "./HomeHero";
+import BackToTopLogo from "./BackToTopLogo";
 
 
 
@@ -178,8 +180,18 @@ export default function App() {
 
       {/* Main content */}
       <div><BackgroundAnimation /></div>
+      <div>
+        <HomeHero
+          onLogin={() => setModalType('login')}
+          onSignup={() => setModalType('signup')}
+          onScrollNext={() => scrollToSection('WhyJoin')}
+        />
+      </div>
 
       <main className="pt-24 max-w-5xl mx-auto px-4">
+
+        
+
         {
           <WhyJoin />
         }
@@ -269,7 +281,8 @@ export default function App() {
       </div>
 
 
-
+    {/* Footer logo + mobile FAB */}
+    <BackToTopLogo homeAnchorId="HomeHero" />
     </main>
     </div>
   );
