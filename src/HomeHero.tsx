@@ -2,7 +2,7 @@
 // A simple top-of-page hero section (no navbar link). All UI text is in English for consistency.
 // Comments are in English.
 
-import React from "react";
+//import React from "react";
 
 type Props = {
   onLogin?: () => void;

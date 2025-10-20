@@ -2,7 +2,7 @@
 // Desktop: bottom-left NeatAffiliates logo (click -> scroll top)
 // Mobile: floating circular up-arrow button on bottom-left
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   homeAnchorId?: string;
