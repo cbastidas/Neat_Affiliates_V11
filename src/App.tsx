@@ -14,6 +14,7 @@ import LoginSignupModal from './LoginSignupModal';
 import NewsImage from './NewsImage';
 import HomeHero from "./HomeHero";
 import BackToTopLogo from "./BackToTopLogo";
+import ContactQuickModal from "./ContactQuickModal";
 
 
 
@@ -22,6 +23,8 @@ export default function App() {
   const [brands, setBrands] = useState<any[]>([]);
   const [session, setSession] = useState<Session | null>(null);
   const [modalType, setModalType] = useState<'login' | 'signup' | null>(null);
+  const [contactOpen, setContactOpen] = useState(false);
+  const [contactInstance, setContactInstance] = useState<string | null>(null);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -51,6 +54,11 @@ export default function App() {
       setSignupByInstance(map);
     }
   };
+
+  const openContactFor = (instance: string) => {
+  setContactInstance(instance);
+  setContactOpen(true);
+};
 
   const getSignupForBrand = (brand: any) => {
   const byBrand = (brand.signup_url || '').trim();
@@ -266,6 +274,7 @@ export default function App() {
                   onSave={() => {}}
                   isPublicView={true} // 👈 IMPORTANT: Public Mode
                   signupUrl={getSignupForBrand(brand)}
+                  onLogoClick={() => openContactFor(brand.group)}
                 />
               ))}
             </div>
@@ -314,6 +323,12 @@ export default function App() {
 
     {/* Footer logo + mobile FAB */}
     <BackToTopLogo homeAnchorId="HomeHero" />
+    <ContactQuickModal
+      isOpen={contactOpen}
+      instance={contactInstance}
+      onClose={() => setContactOpen(false)}
+    />
+
     </main>
     </div>
   );

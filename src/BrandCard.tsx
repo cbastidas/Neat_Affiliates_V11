@@ -18,7 +18,8 @@ interface BrandCardProps {
   isPublicView?: boolean;
   group?: string;
   signupUrl?: string;
-}
+  onLogoClick?: () => void;
+};
 
 export default function BrandCard({
   id,
@@ -32,6 +33,8 @@ export default function BrandCard({
   isPublicView = false,
   group,
   signupUrl,  
+  onLogoClick,
+  
   
 }: BrandCardProps) {
   const [isEditing, setIsEditing] = useState(false);
@@ -44,6 +47,8 @@ export default function BrandCard({
   const [previewUrl, setPreviewUrl] = useState<string>(logoUrl);
   const [saving, setSaving] = useState(false);
   const [editedGroup, setEditedGroup] = useState(group || '');
+  
+  
 
 
   const handleTierChange = (index: number, field: 'range' | 'rate', value: string) => {
@@ -125,7 +130,16 @@ export default function BrandCard({
   return (
     <div className="brand-card mx-auto relative">
       <div className="flex justify-between items-center mb-2">
-        <img src={previewUrl} alt={name} className="h-10 object-contain" />
+        <button
+          type="button"
+          onClick={onLogoClick}
+          className="focus:outline-none"
+          aria-label="Still have questions? View contact"
+          title="Still have questions? View contact"
+          style={{ lineHeight: 0 }}
+        >
+          <img src={previewUrl} alt={name} className="h-10 object-contain cursor-pointer" />
+        </button>
 
         {isPublicView && signupUrl && (
         <a
