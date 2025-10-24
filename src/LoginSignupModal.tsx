@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabaseClient';
 import { createPortal } from 'react-dom';
+import { getInstanceDisplayName } from './instances';
 
 interface AuthLink {
   id: number;
@@ -92,7 +93,7 @@ return createPortal(
                 title={tooltipText}
                 className="border p-4 rounded shadow hover:bg-purple-50 transition duration-300 cursor-pointer text-center"
               >
-                <p className="font-bold">{instance}</p>
+                <p className="font-bold">{getInstanceDisplayName(instance)}</p>
                 <p className="text-sm text-gray-600">
                   {type === 'login' ? 'Login' : 'Signup'} Link
                 </p>

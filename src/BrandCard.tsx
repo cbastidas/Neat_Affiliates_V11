@@ -17,6 +17,7 @@ interface BrandCardProps {
   onSave: () => void;
   isPublicView?: boolean;
   group?: string;
+  signupUrl?: string;
 }
 
 export default function BrandCard({
@@ -30,6 +31,8 @@ export default function BrandCard({
   onSave,
   isPublicView = false,
   group,
+  signupUrl,  
+  
 }: BrandCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(name);
@@ -41,6 +44,7 @@ export default function BrandCard({
   const [previewUrl, setPreviewUrl] = useState<string>(logoUrl);
   const [saving, setSaving] = useState(false);
   const [editedGroup, setEditedGroup] = useState(group || '');
+
 
   const handleTierChange = (index: number, field: 'range' | 'rate', value: string) => {
     const updated = [...tiers];
@@ -119,10 +123,23 @@ export default function BrandCard({
   };
 
   return (
-    <div className="brand-card mx-auto">
+    <div className="brand-card mx-auto relative">
       <div className="flex justify-between items-center mb-2">
         <img src={previewUrl} alt={name} className="h-10 object-contain" />
-        {!isPublicView && (
+
+        {isPublicView && signupUrl && (
+        <a
+          href={signupUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center justify-center rounded-full bg-green-700 px-4 py-1.5 text-white text-sm font-semibold hover:bg-green-800 transition"
+        >
+          Join Now
+        </a>
+      )}
+
+        {!isPublicView &&(
+            
           isEditing ? (
             <label className="flex items-center gap-1 text-sm">
               <input

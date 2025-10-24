@@ -30,12 +30,41 @@ export default function App() {
       setMenuOpen(false);
     }
   };
+  const [signupByInstance, setSignupByInstance] = useState<Record<string, string>>({});
+
+  // 🟢 Fetch signup links by instance (auth table)
+  const fetchSignupLinks = async () => {
+    const { data, error } = await supabase
+      .from('auth_links') // 👉 cambia a 'auth_links' si esa es tu tabla real
+      .select('instance, signup');
+
+    if (error) {
+      console.error('Error fetching signup links:', error.message);
+      return;
+    }
+
+    if (data) {
+      const map: Record<string, string> = {};
+      data.forEach((row) => {
+        if (row.instance && row.signup) map[row.instance] = row.signup;
+      });
+      setSignupByInstance(map);
+    }
+  };
+
+  const getSignupForBrand = (brand: any) => {
+  const byBrand = (brand.signup_url || '').trim();
+  if (byBrand) return byBrand;
+
+  const key = (brand.group || '').trim();
+  return signupByInstance[key] || undefined;
+};
 
   useEffect(() => {
     const fetchBrands = async () => {
       const { data, error } = await supabase
         .from('brands')
-        .select('*')
+        .select('*, signup_url')
         .eq('is_visible', true)
         .order('created_at', { ascending: false });
 
@@ -47,6 +76,7 @@ export default function App() {
     };
 
     fetchBrands();
+    fetchSignupLinks();
 
     // 🟣 Admin Authentication
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -235,6 +265,7 @@ export default function App() {
                   commission_tiers_label={brand.commission_tiers_label}
                   onSave={() => {}}
                   isPublicView={true} // 👈 IMPORTANT: Public Mode
+                  signupUrl={getSignupForBrand(brand)}
                 />
               ))}
             </div>
