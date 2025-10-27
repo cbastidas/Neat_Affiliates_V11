@@ -19,12 +19,19 @@ export default function Terms() {
         .eq('id', TERMS_ID)
         .single();
 
-      if (!error) setContent(data?.content || '');
-      setLoading(false);
-    };
+if (!error && data?.content) {
 
-    fetchTerms();
-  }, []);
+      const replacedContent = data.content
+        .replace(/\bRealm\b/g, 'Instance 1')
+        .replace(/\bThrone\b/g, 'Instance 2');
+
+      setContent(replacedContent);
+    }
+    setLoading(false);
+  };
+
+  fetchTerms();
+}, []);
 
   if (isAdmin) return <TermsEditor />;
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { supabase } from './lib/supabaseClient';
+import { supabase } from './lib/supabaseClient.ts';
 import BrandCard from './BrandCard.tsx';
 import AddBrandModal from './AddBrandModal.tsx';
 import WhyJoinEditor from './WhyJoinEditor';
@@ -8,6 +8,7 @@ import FaqEditor from './FaqEditor';
 import AuthEditor from './AuthEditor';
 import LogoVisibilityManager from './LogoVisibilityManager';
 import './styles.css';
+import SectionVisibilityToggle from "./SectionVisibilityToggle";
 
 interface CommissionTier {
   range: string;
@@ -203,9 +204,12 @@ export default function AdminDashboard() {
         </section>
 
         <section ref={contactRef}>
+          <SectionVisibilityToggle sectionKey="contact_section" size="md" />
           <h2 className="text-2xl font-bold text-center mb-6">📬 Contact Admin Editor</h2>
           <ContactEditor />
         </section>
+
+
 
         <section ref={faqRef}>
           <h2 className="text-2xl font-bold text-center mb-6">❓ FAQ Admin Editor</h2>

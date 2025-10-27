@@ -74,9 +74,6 @@ export default function ContactQuickModal({ isOpen, instance, onClose }: Props) 
 
         <div className="p-6">
           <h3 className="text-2xl font-bold text-center mb-2">Contact</h3>
-          <p className="text-center text-gray-600 mb-6">
-            Still have questions? Reach out to us via any of the methods below.
-          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {filtered.map((c) => (

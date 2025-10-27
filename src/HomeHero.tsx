@@ -10,7 +10,7 @@ type Props = {
   onScrollNext?: () => void; // scroll to the next section (e.g., WhyJoin)
 };
 
-export default function HomeHero({ onLogin, onSignup, onScrollNext }: Props) {
+export default function HomeHero({ onSignup, onScrollNext }: Props) {
   return (
     <section
       id="HomeHero"
@@ -30,14 +30,9 @@ export default function HomeHero({ onLogin, onSignup, onScrollNext }: Props) {
             onClick={onSignup}
             className="rounded-xl bg-green-700 px-6 py-3 text-white hover:bg-green-800 transition"
           >
-            Signup
+            Register Now and Start Earning
           </button>
-          <button
-            onClick={onLogin}
-            className="rounded-xl bg-purple-700 px-6 py-3 text-white hover:bg-purple-800 transition"
-          >
-            Login
-          </button>
+
           <button
             onClick={onScrollNext}
             className="rounded-xl border px-6 py-3 text-gray-700 hover:bg-gray-100 transition"

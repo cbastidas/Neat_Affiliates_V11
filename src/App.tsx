@@ -15,6 +15,9 @@ import NewsImage from './NewsImage';
 import HomeHero from "./HomeHero";
 import BackToTopLogo from "./BackToTopLogo";
 import ContactQuickModal from "./ContactQuickModal";
+import { useUiSections } from './hooks/useUiSections';
+
+
 
 
 
@@ -25,6 +28,8 @@ export default function App() {
   const [modalType, setModalType] = useState<'login' | 'signup' | null>(null);
   const [contactOpen, setContactOpen] = useState(false);
   const [contactInstance, setContactInstance] = useState<string | null>(null);
+  const { map: ui } = useUiSections(); // ui.<key> es true/false según la tabla ui_sections
+
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -83,6 +88,9 @@ export default function App() {
       }
     };
 
+
+
+    // Ejecutar junto con los demás fetch
     fetchBrands();
     fetchSignupLinks();
 
@@ -154,14 +162,14 @@ export default function App() {
     'Contact',
     'FAQ',
   ].map((id) => (
-    <button
-      key={id}
-      onClick={() => scrollToSection(id)}
-      className="text-gray-700 text-sm px-3 py-2 rounded hover:bg-gray-100 transition"
-    >
-      {id.replace(/([A-Z])/g, ' $1').trim()}
-    </button>
-  ))}
+  <button
+    key={id}
+    onClick={() => scrollToSection(id)}
+    className="text-gray-700 text-sm px-3 py-2 rounded hover:bg-gray-100 transition"
+  >
+    {id.replace(/([A-Z])/g, ' $1').trim()}
+  </button>
+))}
 
   <button
     onClick={() => setModalType('login')}
@@ -257,7 +265,14 @@ export default function App() {
                      <h3 className="text-2xl sm:text-3xl font-bold text-purple-800 text-center mb-6 underline decoration-purple-300 underline-offset-4">
                        {publicNames[groupName] || groupName}
                      </h3>
-            
+                      <button
+                        type="button"
+                        onClick={() => openContactFor(groupName)}
+                        className="absolute top-6 right-6 inline-flex items-center justify-center rounded-full bg-green-700 px-5 py-2.5 text-white text-sm font-semibold shadow hover:bg-green-800 active:scale-[0.99] transition"
+                        aria-label={`Contact for ${publicNames[groupName] || groupName}`}
+                      >
+                        Still have questions? Contact us!
+                      </button>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center bg-white rounded-2xl border">
               {brands.map((brand) => (
@@ -274,7 +289,7 @@ export default function App() {
                   onSave={() => {}}
                   isPublicView={true} // 👈 IMPORTANT: Public Mode
                   signupUrl={getSignupForBrand(brand)}
-                  onLogoClick={() => openContactFor(brand.group)}
+                  //onLogoClick={() => openContactFor(brand.group)}
                 />
               ))}
             </div>
@@ -290,9 +305,13 @@ export default function App() {
         </div>
 
         
+        {ui.contact_section !== false && (
+          <>
+            <Contact />
+            <br />
+          </>
+        )}
 
-        <Contact />   
-        <br></br> 
 
         <Faq />
 

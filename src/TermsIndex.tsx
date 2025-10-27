@@ -6,9 +6,9 @@ export default function TermsIndex() {
   const isAdmin = searchParams.get('admin') === 'true';
 
   const terms = [
-    { label: 'Realm', path: 'realm-terms-of-use' },
+    { label: 'Instance 1', path: 'realm-terms-of-use' },
     { label: 'Casinomaxi', path: 'casinomaxi-terms-of-use' },
-    { label: 'Throne', path: 'throne-terms-of-use' },
+    { label: 'Instance 2', path: 'throne-terms-of-use' },
     { label: 'Vidavegas', path: 'vidavegas-terms-of-use' },
     { label: 'Bluffbet', path: 'bluffbet-terms-of-use' },
   ];

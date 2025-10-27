@@ -18,7 +18,6 @@ interface BrandCardProps {
   isPublicView?: boolean;
   group?: string;
   signupUrl?: string;
-  onLogoClick?: () => void;
 };
 
 export default function BrandCard({
@@ -33,7 +32,6 @@ export default function BrandCard({
   isPublicView = false,
   group,
   signupUrl,  
-  onLogoClick,
   
   
 }: BrandCardProps) {
@@ -130,16 +128,8 @@ export default function BrandCard({
   return (
     <div className="brand-card mx-auto relative">
       <div className="flex justify-between items-center mb-2">
-        <button
-          type="button"
-          onClick={onLogoClick}
-          className="focus:outline-none"
-          aria-label="Still have questions? View contact"
-          title="Still have questions? View contact"
-          style={{ lineHeight: 0 }}
-        >
-          <img src={previewUrl} alt={name} className="h-10 object-contain cursor-pointer" />
-        </button>
+
+          <img src={previewUrl} alt={name} className="h-10 object-contain" />
 
         {isPublicView && signupUrl && (
         <a
