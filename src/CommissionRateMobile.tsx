@@ -18,6 +18,7 @@ export default function CommissionRateMobile({
   brands,
 }: {
   brands: Brand[];
+  signupByInstance?: Record<string, string>;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);

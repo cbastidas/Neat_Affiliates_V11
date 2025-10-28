@@ -14,8 +14,8 @@ export default function HomeHero({ onSignup, onScrollNext }: Props) {
   return (
     <section
       id="HomeHero"
-      className="relative isolate overflow-hidden bg-gradient-to-b from-white to-gray-50"
-      style={{ paddingTop: "6rem" }} // offset for fixed navbar
+      className="relative isolate overflow-hidden bg-transparent-to-b from-white to-gray-50"
+      style={{ paddingTop: "5rem" }} // offset for fixed navbar
     >
       <div className="mx-auto max-w-5xl px-4 py-16 sm:py-24 text-center">
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-gray-900">

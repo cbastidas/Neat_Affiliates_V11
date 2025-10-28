@@ -23,7 +23,7 @@ export default function Navbar({ onOpenModal }: NavbarProps) {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md px-6 py-4 flex items-center justify-between z-20">
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md px-6 py-2 flex items-center justify-between z-20">
       {/* Logo */}
       <div
         onClick={() => {

@@ -32,6 +32,7 @@ export default function App() {
   const [contactInstance, setContactInstance] = useState<string | null>(null);
   //const { map: ui } = useUiSections(); 
   const [isContactEmailOpen, setIsContactEmailOpen] = useState(false);
+  
 
 
   const scrollToSection = (id: string) => {
@@ -133,7 +134,8 @@ export default function App() {
     
     <div className="font-sans min-h-screen bg-gray-50">
       {/* Navbar */}
-<nav className="fixed top-0 left-0 w-full bg-white shadow-md px-6 py-4 flex justify-between items-center flex-wrap z-20">
+
+<nav className="fixed top-0 left-0 w-full bg-white shadow-md px-6 py-2 flex justify-between items-center flex-wrap z-20">
 
   {/* Logo - Takes to TOP */}
   <div
@@ -287,8 +289,14 @@ export default function App() {
 
                       {/* Mobile carousel */}
                       <div className="md:hidden mx-[-76px] px-4">
-                        <CommissionRateMobile brands={brands} />
-                      </div>
+                        <CommissionRateMobile 
+                        brands={brands.map(brand => ({
+                          ...brand,
+                          signup_url: getSignupForBrand(brand),
+                        })) }
+                        />
+                        </div>  
+
             
             <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center bg-white rounded-2xl border">
               {brands.map((brand) => (
