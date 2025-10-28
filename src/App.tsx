@@ -8,14 +8,16 @@ import AdminDashboard from './AdminDashboard';
 import WhyJoin from './WhyJoin';
 import AdminLogin from './AdminLogin';
 import { Session } from '@supabase/supabase-js';
-import Contact from './Contact';
+//import Contact from './Contact';
 import Faq from './Faq';
 import LoginSignupModal from './LoginSignupModal';
 import NewsImage from './NewsImage';
 import HomeHero from "./HomeHero";
 import BackToTopLogo from "./BackToTopLogo";
 import ContactQuickModal from "./ContactQuickModal";
-import { useUiSections } from './hooks/useUiSections';
+//import { useUiSections } from './hooks/useUiSections';
+import ContactEmailModal from "./ContactEmailModal";
+import CommissionRateMobile from './CommissionRateMobile';
 
 
 
@@ -28,7 +30,8 @@ export default function App() {
   const [modalType, setModalType] = useState<'login' | 'signup' | null>(null);
   const [contactOpen, setContactOpen] = useState(false);
   const [contactInstance, setContactInstance] = useState<string | null>(null);
-  const { map: ui } = useUiSections(); // ui.<key> es true/false según la tabla ui_sections
+  //const { map: ui } = useUiSections(); 
+  const [isContactEmailOpen, setIsContactEmailOpen] = useState(false);
 
 
   const scrollToSection = (id: string) => {
@@ -164,25 +167,33 @@ export default function App() {
   ].map((id) => (
   <button
     key={id}
-    onClick={() => scrollToSection(id)}
+    onClick={() => {
+      if (id === 'Contact') {
+        setIsContactEmailOpen(true); // open popup instead of scrolling
+      } else {
+        scrollToSection(id);
+      }
+    }}
     className="text-gray-700 text-sm px-3 py-2 rounded hover:bg-gray-100 transition"
-  >
+    >
     {id.replace(/([A-Z])/g, ' $1').trim()}
   </button>
 ))}
 
   <button
+    onClick={() => setModalType('signup')}
+    className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-800"
+  >
+    Register
+  </button>
+
+  <button
     onClick={() => setModalType('login')}
-    className="bg-purple-700 text-white px-3 py-1 rounded hover:bg-purple-800"
+    className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-800"
   >
     Login
   </button>
-  <button
-    onClick={() => setModalType('signup')}
-    className="bg-green-700 text-white px-3 py-1 rounded hover:bg-green-800"
-  >
-    Signup
-  </button>
+
 </div>
 
 </nav>
@@ -196,7 +207,7 @@ export default function App() {
       { id: 'News', label: 'News' },
       { id: 'CommissionRate', label: 'Commission Rate' },
       { id: 'OurBrands', label: 'Our Brands' },
-      { id: 'Contact', label: 'Contact' },
+      //{ id: 'Contact', label: 'Contact' },
       { id: 'FAQ', label: 'FAQ' },
     ].map(({ id, label }) => (
       <button
@@ -268,13 +279,18 @@ export default function App() {
                       <button
                         type="button"
                         onClick={() => openContactFor(groupName)}
-                        className="absolute top-6 right-6 inline-flex items-center justify-center rounded-full bg-green-700 px-5 py-2.5 text-white text-sm font-semibold shadow hover:bg-green-800 active:scale-[0.99] transition"
+                        className="absolute top-6 right-6 inline-flex items-center justify-center rounded-full bg-green-600 px-5 py-2.5 text-white text-sm font-semibold shadow hover:bg-green-800 active:scale-[0.99] transition"
                         aria-label={`Contact for ${publicNames[groupName] || groupName}`}
                       >
                         Still have questions? Contact us!
                       </button>
+
+                      {/* Mobile carousel */}
+                      <div className="md:hidden">
+                        <CommissionRateMobile brands={brands} />
+                      </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center bg-white rounded-2xl border">
+            <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center bg-white rounded-2xl border">
               {brands.map((brand) => (
                 <BrandCard
                   key={brand.id}
@@ -304,30 +320,30 @@ export default function App() {
         <PublicBrandLogoGallery />
         </div>
 
-        
+        {/* Contact Section
         {ui.contact_section !== false && (
           <>
             <Contact />
             <br />
           </>
         )}
-
+          */}
 
         <Faq />
 
       {/* Login and Signup Section */}
       <div className="text-center my-10">
-          <button
-            onClick={() => setModalType('login')}
-            className="bg-purple-700 text-white px-5 py-2 rounded mx-2 hover:bg-purple-800"
-          >
-            Login
-          </button>
+
+          <h2 className="text-3xl font-bold mb-6">Join Neat Affiliates Today!</h2>
+          <h3 className="text-lg text-gray-600 mb-6">
+            Sign up now to start earning commissions with ease.
+          </h3>
+          
           <button
             onClick={() => setModalType('signup')}
-            className="bg-green-700 text-white px-5 py-2 rounded mx-2 hover:bg-green-800"
+            className="bg-green-600 text-white px-5 py-2 rounded mx-2 hover:bg-green-800"
           >
-            Signup
+            Get Started
           </button>
 
           {modalType && (
@@ -347,6 +363,40 @@ export default function App() {
       instance={contactInstance}
       onClose={() => setContactOpen(false)}
     />
+
+    {/* Mobile-only floating Contact button (bottom-left) */}
+{!isContactEmailOpen && (
+  <button
+    type="button"
+    onClick={() => setIsContactEmailOpen(true)}
+    className="
+      fixed left-4 
+      bottom-[calc(1rem+env(safe-area-inset-bottom))] 
+      z-[10000] 
+      md:hidden 
+      h-12 w-12 
+      rounded-full 
+      bg-green-600 
+      shadow-lg 
+      flex items-center justify-center 
+      text-2xl 
+      hover:bg-green-800 
+      active:scale-[0.98] 
+      transition
+    "
+    aria-label="Open Contact form"
+    title="Contact"
+  >
+    <span className="leading-none">💬</span>
+  </button>
+)}
+
+{/* Global Contact modal (opens from navbar or FAB) */}
+<ContactEmailModal
+  isOpen={isContactEmailOpen}
+  onClose={() => setIsContactEmailOpen(false)}
+/>
+
 
     </main>
     </div>

@@ -36,7 +36,7 @@ export default function Faq() {
 
       <div className="flex justify-center flex-wrap gap-4 mb-6">
         {categories.map((cat) => (
-          <button key={cat} className={`px-4 py-2 rounded-full ${activeCategory === cat ? 'bg-purple-600 text-white' : 'bg-gray-200 text-black'}`} onClick={() => setActiveCategory(cat)}>
+          <button key={cat} className={`px-4 py-2 rounded-full ${activeCategory === cat ? 'bg-purple-600 text-white hover:bg-purple-800' : 'bg-gray-200 text-black hover:bg-gray-400'}`} onClick={() => setActiveCategory(cat)}>
             {cat}
           </button>
         ))}
@@ -44,7 +44,7 @@ export default function Faq() {
 
       <div className="max-w-4xl mx-auto text-left">
         {filtered.map((faq) => (
-          <div key={faq.id} className="mb-4 border rounded bg-white">
+          <div key={faq.id} className="mb-4 border rounded bg-white hover:bg-gray-200 transition-colors">
             <button onClick={() => setExpanded(expanded === faq.id ? null : faq.id)} className="w-full text-left px-4 py-3 font-semibold">
               {faq.question}
             </button>

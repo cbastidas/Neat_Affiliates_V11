@@ -126,17 +126,17 @@ export default function BrandCard({
   };
 
   return (
-    <div className="brand-card mx-auto relative">
+    <div className="brand-card mx-auto relative hover:shadow-lg transition">
       <div className="flex justify-between items-center mb-2">
 
-          <img src={previewUrl} alt={name} className="h-10 object-contain" />
+          <img src={previewUrl} alt={name} className="h-10 object-contain max-w-full" style={{ maxHeight: 48 }} />
 
         {isPublicView && signupUrl && (
         <a
           href={signupUrl}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center justify-center rounded-full bg-green-700 px-4 py-1.5 text-white text-sm font-semibold hover:bg-green-800 transition"
+          className="inline-flex items-center justify-center rounded-full bg-green-600 px-4 py-1.5 text-white text-sm font-semibold hover:bg-green-800 transition"
         >
           Join Now
         </a>
@@ -176,7 +176,7 @@ export default function BrandCard({
           className="text-lg font-semibold text-center mb-1 border p-1 rounded"
         />
       ) : (
-        <h3 className="text-lg font-semibold text-center mb-1">{editedName}</h3>
+        <h3 className="text-lg sm:text-x1 font-semibold text-center mb-1 break-words">{editedName}</h3>
       )}
 
       {/* Group Selector */}
@@ -223,7 +223,7 @@ export default function BrandCard({
       )}
 
       <div className="overflow-x-auto text-sm">
-        <table className="table-fixed w-full text-sm text-left text-gray-700 border border-gray-200">
+        <table className="table-fixed w-full max-w-full text-sm text-left text-gray-700 border border-gray-200">
           <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
             <tr>
               <th className="px-4 py-2 border border-gray-200 w-1/2 truncate">{editedTiersLabel} TIERS</th>
