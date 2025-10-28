@@ -18,6 +18,7 @@ import ContactQuickModal from "./ContactQuickModal";
 //import { useUiSections } from './hooks/useUiSections';
 import ContactEmailModal from "./ContactEmailModal";
 import CommissionRateMobile from './CommissionRateMobile';
+import Testimonials from './Testimonials';
 
 
 
@@ -336,6 +337,10 @@ export default function App() {
           </>
         )}
           */}
+        
+        <div id="Testimonials" className="my-16">
+        <Testimonials />
+        </div>
 
         <Faq />
 
