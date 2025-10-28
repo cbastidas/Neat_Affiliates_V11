@@ -286,7 +286,7 @@ export default function App() {
                       </button>
 
                       {/* Mobile carousel */}
-                      <div className="md:hidden">
+                      <div className="md:hidden mx-[-76px] px-4">
                         <CommissionRateMobile brands={brands} />
                       </div>
             

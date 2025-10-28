@@ -62,9 +62,9 @@ export default function CommissionRateMobile({
                 snap-start shrink-0
                 px-[clamp(8px,3.5vw,18px)]
             "
-            style={{ width: "min(92vw, 420px)" }}
+            style={{ width: "min(94vw, 420px)" }}
             >
-              <div className="w-full bg-white rounded-2xl border shadow-md p-4 sm:p-6 text-center">
+              <div className="w-full bg-white rounded-2xl border shadow-md p-4 sm:p-6">
                 <BrandCard
                   id={b.id}
                   logoUrl={b.logo_url}

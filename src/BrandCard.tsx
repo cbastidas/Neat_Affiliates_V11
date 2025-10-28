@@ -129,7 +129,7 @@ export default function BrandCard({
     <div className="brand-card mx-auto relative hover:shadow-lg transition">
       <div className="flex justify-between items-center mb-2">
 
-          <img src={previewUrl} alt={name} className="h-10 object-contain max-w-full" style={{ maxHeight: 48 }} />
+          <img src={previewUrl} alt={name} className="h-8 md:h-10 object-contain max-w-full" style={{ maxHeight: 48 }} />
 
         {isPublicView && signupUrl && (
         <a
@@ -176,7 +176,7 @@ export default function BrandCard({
           className="text-lg font-semibold text-center mb-1 border p-1 rounded"
         />
       ) : (
-        <h3 className="text-lg sm:text-x1 font-semibold text-center mb-1 break-words">{editedName}</h3>
+        <h3 className="text-base md:text-lg font-semibold text-center mb-1 break-words">{editedName}</h3>
       )}
 
       {/* Group Selector */}
@@ -201,7 +201,7 @@ export default function BrandCard({
       )}
 
       {isEditing && !isPublicView && (
-        <div className="grid grid-cols-2 gap-2 mb-2">
+        <div className="grid grid-cols-2 gap-2 mb-1">
           <select
             value={editedTiersLabel}
             onChange={(e) => setEditedTiersLabel(e.target.value)}
@@ -222,47 +222,55 @@ export default function BrandCard({
         </div>
       )}
 
-      <div className="overflow-x-auto text-sm">
-        <table className="table-fixed w-full max-w-full text-sm text-left text-gray-700 border border-gray-200">
-          <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
+      <div className="overflow-x-hidden text-[13px] md:text-sm">
+        <table className="table-fixed w-full max-w-full text-left text-gray-700 border border-gray-200">
+          <thead className="bg-gray-100 text-gray-600 uppercase text-[11px] md:text-xs">
             <tr>
-              <th className="px-4 py-2 border border-gray-200 w-1/2 truncate">{editedTiersLabel} TIERS</th>
-              <th className="px-4 py-2 border border-gray-200 w-1/2 truncate">{editedCommissionType}</th>
+              <th className="px-3 md:px-4 py-2 border border-gray-200 w-1/2 truncate">{editedTiersLabel} TIERS</th>
+              <th className="px-3 md:px-4 py-2 border border-gray-200 w-1/2 truncate">{editedCommissionType}</th>
             </tr>
           </thead>
           <tbody>
             {tiers.map((tier, index) => (
               <tr key={index}>
-                <td className="px-4 py-2 border border-gray-200 align-top">
+                <td className="px-3 md:px-4 py-2 border border-gray-200 align-top whitespace-normal break-words leading-tight">
                   {isEditing && !isPublicView ? (
                     <input
                       value={tier.range}
                       onChange={(e) => handleTierChange(index, 'range', e.target.value)}
-                      className="w-full border rounded p-1 text-sm"
+                      className="w-full border rounded p-1 text-[13px] md:text-sm"
                     />
                   ) : (
                     tier.range
                   )}
                 </td>
-                <td className="px-3 py-2 border border-gray-200 text-center align-top">
+                
+                <td className="px-3 md:px-4 py-2 border border-gray-200 text-center align-top">
                   {isEditing && !isPublicView ? (
                     <div className="flex justify-end items-center gap-1">
                       <input
                         value={tier.rate}
                         onChange={(e) => handleTierChange(index, 'rate', e.target.value)}
-                        className="w-full border rounded p-1 text-center text-sm"
+                        className="w-full border rounded p-1 text-center text-[13px] md:text-sm"
                       />
                       {tiers.length > 1 && (
-                        <button onClick={() => handleRemoveTier(index)} className="text-red-500 font-bold">✕</button>
+                        <button
+                          onClick={() => handleRemoveTier(index)}
+                          className="text-red-500 font-bold hover:text-red-700"
+                          title="Remove tier"
+                        >
+                          ✕
+                        </button>
                       )}
                     </div>
                   ) : (
-                    <strong>{tier.rate}</strong>
+                    <strong className="leading-tight">{tier.rate}</strong>
                   )}
                 </td>
               </tr>
             ))}
           </tbody>
+
         </table>
         <colgroup>
           <col style={{ width: '60%' }} />
