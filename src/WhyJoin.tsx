@@ -91,7 +91,7 @@ export default function WhyJoin() {
                 key={item.id}
                 className="w-full shrink-0 snap-start px-2"
               >
-                <div className="p-6 bg-white shadow-md rounded-lg border border-gray-100 hover:shadow-lg transition text-center">
+                <div className="p-6 bg-white shadow-md rounded-lg border border-gray-100 hover:shadow-lg transition text-center hover:border-purple-300">
                   {item.emoji_url && (
                     <img
                       src={item.emoji_url}
@@ -130,7 +130,7 @@ export default function WhyJoin() {
           {items.map((item) => (
             <div
               key={item.id}
-              className="p-6 bg-white shadow-md rounded-lg border border-gray-100 hover:shadow-lg transition"
+              className="p-6 bg-white shadow-md rounded-lg border border-gray-100 hover:shadow-lg transition hover:border-purple-300"
             >
               {item.emoji_url && (
                 <img

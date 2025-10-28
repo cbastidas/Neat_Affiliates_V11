@@ -126,7 +126,7 @@ export default function BrandCard({
   };
 
   return (
-    <div className="brand-card mx-auto relative hover:shadow-lg transition">
+    <div className="brand-card mx-auto relative hover:shadow-lg transition hover:border-purple-300">
       <div className="flex justify-between items-center mb-2">
 
           <img src={previewUrl} alt={name} className="h-8 md:h-10 object-contain max-w-full" style={{ maxHeight: 48 }} />
