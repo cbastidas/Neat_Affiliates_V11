@@ -11,7 +11,13 @@ interface Testimonial {
   content: string;
 }
 
-export default function Testimonials() {
+// 🎯 Define the new prop interface
+interface TestimonialsProps {
+    onSignup: () => void;
+}
+
+// 🎯 Accept the new prop
+export default function Testimonials({ onSignup }: TestimonialsProps) {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [searchParams] = useSearchParams();
   const isAdmin = searchParams.get('admin') === 'true';
@@ -212,6 +218,19 @@ export default function Testimonials() {
             ))}
           </div>
         )}
+      </div>
+      
+      {/* 🎯 NEW CTA BUTTON */}
+      <div className="text-center mt-16">
+          <h3 className="text-xl text-gray-700 mb-4">
+            Ready to become our next success story?
+          </h3>
+          <button
+              onClick={onSignup}
+              className="text-base sm:text-lg lg:text-xl font-bold px-8 py-3 rounded-full bg-purple-600 text-white hover:bg-purple-800 shadow-lg transition"
+          >
+              Join the Affiliates Community
+          </button>
       </div>
     </section>
   );

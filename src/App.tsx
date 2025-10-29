@@ -349,7 +349,8 @@ export default function App() {
           */}
         
         <div id="Testimonials" className="my-16">
-        <Testimonials />
+           {/* 🎯 PASS THE onSignup PROP TO TESTIMONIALS */}
+           <Testimonials onSignup={() => setModalType('signup')} /> 
         </div>
 
         {/* 🎯 PASS THE onSignup PROP TO FAQ */}
