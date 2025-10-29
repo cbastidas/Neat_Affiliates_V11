@@ -18,7 +18,7 @@ export default function Root() {
           <Route element={<Layout onOpenModal={setModalType} />}>
             <Route path="/" element={<App />} />
             <Route path="/terms" element={<TermsIndex />} />
-            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/testimonials" element={<Testimonials onSignup={() => {}}/>} />
             <Route path="/providers" element={<Providers />} />
             <Route path="/terms/:slug" element={<TermsViewer />} />
           </Route>
