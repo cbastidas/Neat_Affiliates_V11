@@ -13,13 +13,7 @@ export default function Footer({  }: FooterProps) {
 
   return (
     <footer className="text-center py-8 text-gray-600 text-sm">
-      <button
-        onClick={() => navigate(isAdmin ? '/testimonials?admin=true' : '/testimonials')}
-        className="text-purple-600 underline"
-      >
-        Testimonials
-      </button>
-      {' • '}
+      
       <button
         onClick={() => navigate(isAdmin ? '/terms?admin=true' : '/terms')}
         className="text-purple-600 underline"

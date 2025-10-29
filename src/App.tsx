@@ -150,15 +150,26 @@ export default function App() {
   </div>
 
     {/* Hamburguer Menu */}
+      <div className="md:hidden flex items-center gap-8">
+      {/* 🟢 Login Button (Mobile Only) */}
       <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        className="md:hidden text-purple-700"
+          onClick={() => setModalType('login')}
+          className="rounded-xl bg-green-600 px-5 py-2 text-white font-bold hover:bg-green-800 transition"
       >
-        {menuOpen ? '✕' : '☰'}
+          Login
       </button>
 
+      {/* 🟢 Hamburguer Menu (Increased Size) */}
+      <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="text-purple-700 text-2xl" 
+      >
+          {menuOpen ? '✕' : '☰'}
+      </button>
+  </div>
+
 {/* Desktop nav */}
-<div className="hidden md:flex flex-wrap gap-2 justify-end w-full max-w-full">
+<div className="font-bold hidden md:flex flex-wrap gap-2 justify-end w-full max-w-full">
 
   {[
     'WhyJoin',
@@ -177,7 +188,7 @@ export default function App() {
         scrollToSection(id);
       }
     }}
-    className="text-gray-700 text-sm px-3 py-2 rounded hover:bg-gray-100 transition"
+    className="text-gray-700 text-base px-3 py-2 rounded hover:bg-gray-100 transition"
     >
     {id.replace(/([A-Z])/g, ' $1').trim()}
   </button>
@@ -204,7 +215,7 @@ export default function App() {
 
       {/* Mobile Menu Dropdown */}
 {menuOpen && (
-  <div className="md:hidden fixed top-16 left-0 w-full bg-white shadow-lg z-50 px-4 py-4">
+  <div className="font-bold md:hidden fixed top-16 left-0 w-full bg-white shadow-lg z-50 px-4 py-4">
     {[
       { id: 'WhyJoin', label: 'Why Join' },
       { id: 'News', label: 'News' },
@@ -224,12 +235,6 @@ export default function App() {
 
     {/* Login/Signup en mobile */}
     <button
-      onClick={() => { setModalType('login'); setMenuOpen(false); }}
-      className="block w-full text-left text-purple-700 py-2 px-2 font-medium hover:bg-purple-100"
-    >
-      Login
-    </button>
-    <button
       onClick={() => { setModalType('signup'); setMenuOpen(false); }}
       className="block w-full text-left text-green-700 py-2 px-2 font-medium hover:bg-green-100"
     >
@@ -244,8 +249,11 @@ export default function App() {
         <HomeHero
           onLogin={() => setModalType('login')}
           onSignup={() => setModalType('signup')}
-          onScrollNext={() => scrollToSection('WhyJoin')}
-        />
+          onScrollNext={() => {
+            const faqSection = document.getElementById('FAQ');
+            faqSection?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          />
       </div>
 
       <main className="pt-24 max-w-5xl mx-auto px-4">
@@ -282,13 +290,12 @@ export default function App() {
                       <button
                         type="button"
                         onClick={() => openContactFor(groupName)}
-                        className="absolute top-6 right-6 inline-flex items-center justify-center rounded-full bg-green-600 px-5 py-2.5 text-white text-sm font-semibold shadow hover:bg-green-800 active:scale-[0.99] transition"
+                        className="font-bold absolute top-6 right-6 inline-flex items-center justify-center rounded-full bg-green-600 px-5 py-2.5 text-white text-sm font-semibold shadow hover:bg-green-800 active:scale-[0.99] transition"
                         aria-label={`Contact for ${publicNames[groupName] || groupName}`}
                       >
                         Still have questions? Contact us!
                       </button>
 
-                      {/* Mobile carousel */}
                       <div className="md:hidden mx-[-76px] px-4">
                         <CommissionRateMobile 
                         brands={brands.map(brand => ({
@@ -296,7 +303,7 @@ export default function App() {
                           signup_url: getSignupForBrand(brand),
                         })) }
                         />
-                        </div>  
+                        </div>
 
             
             <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center bg-white rounded-2xl border">
@@ -326,7 +333,10 @@ export default function App() {
         </section>
 
         <div id="OurBrands" className="py-16">
-        <PublicBrandLogoGallery />
+        {/* 🎯 Pass the onSignup function */}
+        <PublicBrandLogoGallery 
+          onSignup={() => setModalType('signup')} 
+        />
         </div>
 
         {/* Contact Section
@@ -342,7 +352,8 @@ export default function App() {
         <Testimonials />
         </div>
 
-        <Faq />
+        {/* 🎯 PASS THE onSignup PROP TO FAQ */}
+        <Faq onSignup={() => setModalType('signup')} />
 
       {/* Login and Signup Section */}
       <div className="text-center my-10">
@@ -354,7 +365,7 @@ export default function App() {
           
           <button
             onClick={() => setModalType('signup')}
-            className="bg-green-600 text-white px-5 py-2 rounded mx-2 hover:bg-green-800"
+            className="text-base sm:text-lg lg:text-xl font-bold bg-green-600 text-white px-5 py-2 rounded mx-2 hover:bg-green-800"
           >
             Get Started
           </button>

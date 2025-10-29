@@ -8,7 +8,11 @@ interface Logo {
   is_visible: boolean;
 }
 
-export default function BrandLogoGallery() {
+interface BrandLogoGalleryProps {
+  onSignup: () => void;
+}
+
+export default function BrandLogoGallery({ onSignup }: BrandLogoGalleryProps) {
   const [logos, setLogos] = useState<Logo[]>([]);
 
   useEffect(() => {
@@ -52,6 +56,15 @@ export default function BrandLogoGallery() {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="text-center mt-12">
+            <button
+                onClick={onSignup}
+                className="text-base sm:text-lg lg:text-xl font-bold px-8 py-3 rounded-full bg-green-600 text-white hover:bg-green-800 shadow-lg transition"
+            >
+                Start Earning with Our Brands
+            </button>
         </div>
       </div>
 

@@ -136,7 +136,7 @@ export default function BrandCard({
           href={signupUrl}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center justify-center rounded-full bg-green-600 px-4 py-1.5 text-white text-sm font-semibold hover:bg-green-800 transition"
+          className="font-bold inline-flex items-center justify-center rounded-full bg-green-600 px-4 py-1.5 text-white text-sm font-semibold hover:bg-green-800 transition"
         >
           Join Now
         </a>

@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabaseClient';
 
-interface Faq {
+interface FaqItem { // Renamed from Faq to FaqItem for clarity
   id: string;
   category: string;
   question: string;
   answer: string;
 }
 
-export default function Faq() {
-  const [faqs, setFaqs] = useState<Faq[]>([]);
+// 🎯 Define the new prop interface
+interface FaqProps {
+    onSignup: () => void;
+}
+
+// 🎯 Accept the new prop
+export default function Faq({ onSignup }: FaqProps) {
+  const [faqs, setFaqs] = useState<FaqItem[]>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
 
@@ -36,7 +42,11 @@ export default function Faq() {
 
       <div className="flex justify-center flex-wrap gap-4 mb-6">
         {categories.map((cat) => (
-          <button key={cat} className={`px-4 py-2 rounded-full ${activeCategory === cat ? 'bg-purple-600 text-white hover:bg-purple-800' : 'bg-gray-200 text-black hover:bg-gray-400'}`} onClick={() => setActiveCategory(cat)}>
+          <button 
+            key={cat} 
+            className={`px-4 py-2 rounded-full ${activeCategory === cat ? 'bg-purple-600 text-white hover:bg-purple-800' : 'bg-gray-200 text-black hover:bg-gray-400'}`} 
+            onClick={() => setActiveCategory(cat)}
+          >
             {cat}
           </button>
         ))}
@@ -45,7 +55,10 @@ export default function Faq() {
       <div className="max-w-4xl mx-auto text-left">
         {filtered.map((faq) => (
           <div key={faq.id} className="mb-4 border rounded bg-white hover:bg-gray-200 transition-colors">
-            <button onClick={() => setExpanded(expanded === faq.id ? null : faq.id)} className="w-full text-left px-4 py-3 font-semibold">
+            <button 
+              onClick={() => setExpanded(expanded === faq.id ? null : faq.id)} 
+              className="w-full text-left px-4 py-3 font-semibold"
+            >
               {faq.question}
             </button>
             {expanded === faq.id && (
@@ -55,6 +68,16 @@ export default function Faq() {
             )}
           </div>
         ))}
+      </div>
+
+      {/* 🎯 NEW CTA BUTTON */}
+      <div className="text-center mt-12">
+          <button
+              onClick={onSignup}
+              className="text-base sm:text-lg lg:text-xl font-bold px-8 py-3 rounded-full bg-green-600 text-white hover:bg-green-800 shadow-lg transition"
+          >
+              Ready to Partner? Sign Up Now!
+          </button>
       </div>
     </section>
   );
